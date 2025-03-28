@@ -20,6 +20,8 @@ def bfs(graph, root, goal):
 
 	return None
 
+# Depth-first-search algorithm
+# return visited array if goal is achieved, otherwise None
 def dfs(graph, root, goal):
 	stack = []
 	visited = []
