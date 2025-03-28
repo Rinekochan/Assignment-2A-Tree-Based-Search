@@ -1,12 +1,15 @@
 import sys
+from dataclasses import dataclass
 
-# Maps of nodes and edges for graph construction
-nodes = {}
-edges = {}
-origin = None
-destinations = []
+@dataclass
+class Graph:
+	nodes: dict
+	edges: dict
+	origin: int
+	destinations: list
 
-def arg_parse():
+# Parse command line arguments to retrieve graph file name and searching method
+def parse_args():
 	argc = len(sys.argv)
 	if argc != 3:
 		print('Usage: python3 search.py <filename> <method>')
@@ -16,8 +19,13 @@ def arg_parse():
 
 	return (filename, method)
 
-
-def graph_parse(filename):
+# Parse graph information from a text file
+def parse_graph(filename):
+	nodes = {}
+	edges = {}
+	origin = None
+	destinations = []
+	graph = None
 	with open(filename, 'r') as file:
 		current_section = None
 
@@ -54,12 +62,12 @@ def graph_parse(filename):
 			elif current_section == 'destinations':
 				destinations = [int(dest.strip()) for dest in line.split(';')]
 
-	return (nodes, edges, origin, destinations)
+		graph = Graph(nodes, edges, origin, destinations)
+
+	return graph
 
 def main():
-	filename, method = arg_parse()
-	print("{} {}".format(filename, method));
-	nodes, edges, origin, destinations = graph_parse(filename)
-	print("{}\n{}\n{}\n{}".format(nodes, edges, origin, destinations))
+	filename, method = parse_args()
+	graph = parse_graph(filename)
 
 main()
