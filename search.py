@@ -12,14 +12,15 @@ def main():
 
 		for goal in graph.destinations:
 			match method:
-				case "bfs":
+				case "BFS":
 					result = bfs(graph, graph.origin, goal)
-				case "dfs":
+				case "DFS":
 					result = dfs(graph, graph.origin, goal)
 				case "_":
-					exit("Unknown method")
+					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-			print("{} {}".format(goal, result))
+			print("{} {}".format(goal, len(result)))
+			print(result)
 
 
 	except Exception as err:

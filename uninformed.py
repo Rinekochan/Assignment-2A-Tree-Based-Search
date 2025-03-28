@@ -3,7 +3,7 @@
 from utils import Graph
 
 
-def bfs(graph: Graph, root, goal):
+def bfs(graph: Graph, root: int, goal: int):
 	queue = []
 	visited = []
 
@@ -11,21 +11,20 @@ def bfs(graph: Graph, root, goal):
 	visited.append(root)
 
 	while len(queue) != 0:
-		cur_node = queue.pop(0)
-		for node in graph.ad:
-			a, b = edge
-			if a == node and b not in visited:
-				if b == goal:
-					visited.append(b)
+		node = queue.pop(0)
+		for neighbor, _ in graph.adj_list[node]:
+			if neighbor not in visited:
+				if neighbor == goal:
+					visited.append(neighbor)
 					return visited
-				visited.append(b)
-				queue.append(b)
+				visited.append(neighbor)
+				queue.append(neighbor)
 
-	return None
+	raise ValueError("There are some problems search the path")
 
 # Depth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
-def dfs(graph, root, goal):
+def dfs(graph: Graph, root: int, goal: int):
 	stack = []
 	visited = []
 
@@ -34,14 +33,13 @@ def dfs(graph, root, goal):
 
 	while len(stack) != 0:
 		node = stack.pop()
-		for edge in graph.edges:
-			a, b = edge
-			if a == node and b not in visited:
-				if b == goal:
-					visited.append(b)
+		for neighbor, _ in graph.adj_list[node]:
+			if neighbor not in visited:
+				if neighbor == goal:
+					visited.append(neighbor)
 					return visited
-				visited.append(b)
-				stack.append(b)
+				visited.append(neighbor)
+				stack.append(neighbor)
 
-	return None
+	raise ValueError("There are some problems search the path")
 
