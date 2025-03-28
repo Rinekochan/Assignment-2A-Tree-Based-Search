@@ -19,3 +19,24 @@ def bfs(graph, root, goal):
 				queue.append(b)
 
 	return None
+
+def dfs(graph, root, goal):
+	stack = []
+	visited = []
+
+	stack.append(root)
+	visited.append(root)
+
+	while len(stack) != 0:
+		node = stack.pop()
+		for edge in graph.edges:
+			a, b = edge
+			if a == node and b not in visited:
+				if b == goal:
+					visited.append(b)
+					return visited
+				visited.append(b)
+				stack.append(b)
+
+	return None
+
