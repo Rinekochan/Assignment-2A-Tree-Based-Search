@@ -9,7 +9,6 @@ class Graph:
 	edges: dict
 	origin: int
 	destinations: list
-	adj_list: dict
 
 # Parse command line arguments to retrieve graph file name and searching method
 def parse_args():
@@ -25,7 +24,6 @@ def parse_args():
 def parse_graph(filename):
 	nodes = {}
 	edges = {}
-	adj_list = {}
 	origin = None
 	destinations = []
 	graph = None
@@ -60,15 +58,8 @@ def parse_graph(filename):
 						nodes[node_id] = coords
 					case 'edges':
 						edge, weight = line.split(': ')
-						src, dest = map(int, edge.strip('()').split(','))
-						weight = int(weight)
-
-						# Add edge
-						edges[(src, dest)] = weight
-
-						# If adjacency lists of src does not exist, default to empty array
-						adj_list.setdefault(src, []).append((dest, weight))
-
+						edge = tuple(map(int, edge.strip('()').split(',')))
+						edges[edge] = weight
 					case 'origin':
 						origin = int(line)
 					case 'destinations':
@@ -79,7 +70,7 @@ def parse_graph(filename):
 				raise IOError("Unable to read input files, please check the input format again")
 
 
-		graph = Graph(nodes, edges, origin, destinations, adj_list)
+		graph = Graph(nodes, edges, origin, destinations)
 
 	return graph
 
@@ -89,7 +80,6 @@ def main():
 		print("{} {}".format(filename, method))
 
 		graph = parse_graph(filename)
-		print(graph)
 
 		result = []
 
