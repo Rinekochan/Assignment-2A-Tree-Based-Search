@@ -1,6 +1,9 @@
 # Breadth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
-def bfs(graph, root, goal):
+from utils import Graph
+
+
+def bfs(graph: Graph, root, goal):
 	queue = []
 	visited = []
 
@@ -8,8 +11,8 @@ def bfs(graph, root, goal):
 	visited.append(root)
 
 	while len(queue) != 0:
-		node = queue.pop(0)
-		for edge in graph.edges:
+		cur_node = queue.pop(0)
+		for node in graph.ad:
 			a, b = edge
 			if a == node and b not in visited:
 				if b == goal:
