@@ -11,10 +11,10 @@ def main():
 		result = []
 
 		for goal in graph.destinations:
-			match method:
-				case "BFS":
+			match method.lower():
+				case "bfs":
 					result = bfs(graph, graph.origin, goal)
-				case "DFS":
+				case "dfs":
 					result = dfs(graph, graph.origin, goal)
 				case "_":
 					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")

@@ -13,7 +13,10 @@ class Graph:
 def parse_args():
     argc = len(sys.argv)
     if argc != 3:
-        exit("Usage: python3 search.py <filename> <method>")
+        print("Usage: python3 search.py <filename> <method>")
+        print("Methods currently supported:")
+        print("\tbfs - Breath-first search")
+        exit("\tdfs - Depth-first search")
     else:
         filename = sys.argv[1]
         method = sys.argv[2]
