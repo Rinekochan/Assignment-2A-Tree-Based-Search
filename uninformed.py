@@ -1,8 +1,8 @@
-# Breadth-first-search algorithm
-# return visited array if goal is achieved, otherwise None
 from utils import Graph
 
 
+# Breadth-first-search algorithm
+# return visited array if goal is achieved, otherwise None
 def bfs(graph: Graph, root: int, goal: int):
 	queue = []
 	visited = []
