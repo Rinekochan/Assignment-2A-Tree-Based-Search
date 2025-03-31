@@ -1,5 +1,7 @@
 from uninformed import *
+from custom1 import *
 from utils import parse_args, parse_graph
+
 
 def main():
 	try:
@@ -7,7 +9,7 @@ def main():
 		print("{} {}".format(filename, method))
 
 		graph = parse_graph(filename)
-		print(graph)
+		#print(graph)
 
 		result = []
 
@@ -17,7 +19,9 @@ def main():
 					result = bfs(graph, graph.origin, goal)
 				case "dfs":
 					result = dfs(graph, graph.origin, goal)
-				case "gbfs" | "as" | "cus1" | "cus2":
+				case "cus1":
+					result = dijkstra(graph, graph.origin, goal)
+				case "gbfs" | "as"| "cus2":
 					exit("The method {} is available but not implemented yet.".format(method))
 				case _:
 					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
