@@ -16,7 +16,7 @@ def main():
 					result = bfs(graph, graph.origin, goal)
 				case "dfs":
 					result = dfs(graph, graph.origin, goal)
-				case "_":
+				case _:
 					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
 			print("{} {}".format(goal, len(result)))
