@@ -16,6 +16,8 @@ def main():
 					result = bfs(graph, graph.origin, goal)
 				case "dfs":
 					result = dfs(graph, graph.origin, goal)
+				case "gbfs" | "as" | "cus1" | "cus2":
+					exit("The method {} is available but not implemented yet.".format(method))
 				case _:
 					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
