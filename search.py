@@ -7,6 +7,7 @@ def main():
 		print("{} {}".format(filename, method))
 
 		graph = parse_graph(filename)
+		print(graph)
 
 		result = []
 

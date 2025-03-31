@@ -56,12 +56,11 @@ def parse_graph(filename):
                 match current_section:
                     case 'nodes':
                         node_id, coords = line.split(': ')
-                        node_id = int(node_id)
                         coords = tuple(map(int, coords.strip('()').split(',')))
                         nodes[node_id] = coords
                     case 'edges':
                         edge, weight = line.split(': ')
-                        src, dest = map(int, edge.strip('()').split(','))
+                        src, dest = edge.strip('()').split(',')
                         weight = int(weight)
 
                         # Add edges
@@ -71,9 +70,9 @@ def parse_graph(filename):
                         adj_list.setdefault(src, []).append((dest, weight))
 
                     case 'origin':
-                        origin = int(line)
+                        origin = line
                     case 'destinations':
-                        destinations = [int(dest.strip()) for dest in line.split(';')]
+                        destinations = [dest.strip() for dest in line.split(';')]
                     case _:
                         raise ValueError("Unknown section")
             except:

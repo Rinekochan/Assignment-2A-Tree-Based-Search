@@ -3,7 +3,7 @@ from utils import Graph
 
 # Breadth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
-def bfs(graph: Graph, root: int, goal: int):
+def bfs(graph: Graph, root: str, goal: str):
 	queue = []
 	visited = []
 
@@ -24,7 +24,7 @@ def bfs(graph: Graph, root: int, goal: int):
 
 # Depth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
-def dfs(graph: Graph, root: int, goal: int):
+def dfs(graph: Graph, root: str, goal: str):
 	stack = []
 	visited = []
 
