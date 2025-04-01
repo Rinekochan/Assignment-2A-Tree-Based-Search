@@ -32,4 +32,5 @@ def dijkstra(graph: Graph, root: str, goal: str):
                 dist[child] = potential_dist
                 heapq.heappush(pq, (potential_dist, child))
 
-    raise ValueError("There are some problems search the path")
+    print("CUS1: There are some problems searching the path")
+    return []
