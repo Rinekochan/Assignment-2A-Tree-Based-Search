@@ -16,11 +16,11 @@ def dijkstra(graph: Graph, root: str, goal: str):
         current_dist, current_node = heapq.heappop(pq)
 
         if current_node == goal:
+            visited.append(goal)
             return visited
 
         if current_node in visited:
-            visited.append(goal)
-            return visited
+            continue
 
         visited.append(current_node)
         
