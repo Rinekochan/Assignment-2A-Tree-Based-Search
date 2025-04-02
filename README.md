@@ -16,7 +16,7 @@ This repo contains the implement of tree-based search algorithms to solve the Ro
 ## Problem Description
 The Route Finding Problem consists of a directed weighted graph where:
 - Each node represents a location with given (x, y) coordinates.
-Each edge has a cost representing the difficulty or distance to traverse betwee nodes.
+Each edge has a cost representing the difficulty or distance to traverse between nodes.
 - The goal is to find the optimal path from a given Origin and Destination
 
 ## File Format
@@ -50,7 +50,7 @@ Destinations:
 | CUS2: Genetic Algorithm | Informed Custom   | A method for solving both constrained and unconstrained optimisation problems that is based on natural selection |
 
 ## Installation & Requirements
-This project is implemented in Python. Ensure you have Python 3.7.x (or greater) installed. Therer are no dependencies required because only built-in data structures are used.
+This project is implemented in Python. Ensure you have Python 3.10.x (or greater) installed. No external dependencies are required, since only built-in data structures are used.
 ### Running the Program
 Execute the program via the command line:
 ```$ python search.py <input_file> <search_method>```
