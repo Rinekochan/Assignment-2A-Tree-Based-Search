@@ -20,7 +20,9 @@ def bfs(graph: Graph, root: str, goal: str):
 				visited.append(neighbor)
 				queue.append(neighbor)
 
-	raise ValueError("There are some problems search the path")
+	print("BFS: There are some problems searching the path")
+	return []
+
 
 # Depth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
@@ -41,5 +43,5 @@ def dfs(graph: Graph, root: str, goal: str):
 				visited.append(neighbor)
 				stack.append(neighbor)
 
-	raise ValueError("There are some problems search the path")
-
+	print("DFS: There are some problems searching the path")
+	return []
