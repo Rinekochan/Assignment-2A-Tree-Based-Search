@@ -1,6 +1,6 @@
 from uninformed import *
 from custom1 import *
-from greedybfs import *
+from informed import *
 from utils import parse_args, parse_graph
 
 
