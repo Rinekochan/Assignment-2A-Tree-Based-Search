@@ -14,23 +14,22 @@ def main():
 
 		result = []
 
-		for goal in graph.destinations:
-			match method.lower():
-				case "bfs":
-					result = bfs(graph, graph.origin, goal)
-				case "dfs":
-					result = dfs(graph, graph.origin, goal)
-				case "cus1":
-					result = dijkstra(graph, graph.origin, goal)
-				case "gbfs":
-					result = gbfs(graph, graph.origin, graph.destinations)
-				case "as" | "cus2":
-					exit(f"The method {method} is available but not implemented yet.")
-				case _:
-					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
+		match method.lower():
+			case "bfs":
+				result = bfs(graph, graph.origin, graph.destinations)
+			case "dfs":
+				result = dfs(graph, graph.origin, graph.destinations)
+			case "cus1":
+				result = dijkstra(graph, graph.origin, goal)
+			case "gbfs":
+				result = gbfs(graph, graph.origin, graph.destinations)
+			case "as" | "cus2":
+				exit(f"The method {method} is available but not implemented yet.")
+			case _:
+				exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-			print(f"{goal} {len(result)}")
-			print(result)
+		print(f"{result[-1]} {len(result)}") # last element is the goal reached
+		print(result)
 
 
 	except Exception as err:
