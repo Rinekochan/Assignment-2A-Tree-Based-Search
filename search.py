@@ -1,4 +1,5 @@
 from uninformed import *
+from informed import *
 from custom1 import *
 from utils import parse_args, parse_graph
 
@@ -19,9 +20,11 @@ def main():
 					result = bfs(graph, graph.origin, goal)
 				case "dfs":
 					result = dfs(graph, graph.origin, goal)
+				case "as":
+					result = astar(graph, graph.origin, goal)
 				case "cus1":
 					result = dijkstra(graph, graph.origin, goal)
-				case "gbfs" | "as"| "cus2":
+				case "gbfs" | "cus2":
 					exit(f"The method {method} is available but not implemented yet.")
 				case _:
 					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
