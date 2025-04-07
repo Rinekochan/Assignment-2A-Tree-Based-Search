@@ -1,6 +1,7 @@
 ﻿import os
 import random
 
+
 def generate_test_case(num_nodes: int, num_edges: int, max_coordinate: int, max_cost: int) -> str:
     """
     Generates a test case for the shortest path problem.
@@ -53,6 +54,7 @@ def generate_test_case(num_nodes: int, num_edges: int, max_coordinate: int, max_
 
     return "\n".join(output)
 
+
 def generate_and_save_tests(num_tests: int, num_nodes: int, num_edges: int, max_coordinate: int, max_cost: int):
     """
     Generates multiple test cases and saves them as files in the 'Test' directory.
@@ -75,6 +77,7 @@ def generate_and_save_tests(num_tests: int, num_nodes: int, num_edges: int, max_
             file.write(test_data)
 
         print(f"Test case {i} saved to {file_path}")
+
 
 if __name__ == "__main__":
     generate_and_save_tests(num_tests=15, num_nodes=15, num_edges=30, max_coordinate=30, max_cost=20)

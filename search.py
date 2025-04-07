@@ -1,8 +1,9 @@
-from uninformed import *
+from UninformedSearch.bfs import *
+from UninformedSearch.dfs import *
 from informed import *
-from custom1 import *
-from utils import parse_args, parse_graph
+from CustomSearch.CUS1.dijkstra import *
 
+from utils import parse_args, parse_graph
 
 def main():
 	try:

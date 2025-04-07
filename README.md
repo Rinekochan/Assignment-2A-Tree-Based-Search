@@ -69,4 +69,4 @@ The program prints the following results:
     - Cao Minh Vu ([Aragami1408](https://github.com/Aragami1408))
     - Jayden Kong ([jjv7](https://github.com/jjv7))
     - Viet Hoang Pham ([Rinekochan](https://github.com/Rinekochan))
-    - Cade Haynes (CadeHaynes)
+    - Cade Haynes ([CadeHaynes](https://github.com/CadeHaynes))
