@@ -1,4 +1,5 @@
-﻿import sys
+﻿import pdb
+import sys
 import math
 from dataclasses import dataclass
 from collections import defaultdict
@@ -64,6 +65,8 @@ def parse_graph(filename):
                         node_id, coords = line.split(': ')
                         coords = tuple(map(int, coords.strip('()').split(',')))
                         nodes[node_id] = coords
+                        adj_list.setdefault(node_id, {})
+
                     case 'edges':
                         edge, weight = line.split(': ')
                         src, dest = edge.strip('()').split(',')

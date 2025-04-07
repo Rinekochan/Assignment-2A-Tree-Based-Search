@@ -1,4 +1,4 @@
-﻿from typing import Mapping, Tuple
+﻿from typing import Mapping, Tuple, List
 from utils import Graph
 
 
@@ -43,3 +43,13 @@ class PheromoneGraph(object):
             cur_node = path[cur_node][0]
 
         return length
+
+    @staticmethod
+    def get_path_to_array(goal: str, path: Mapping[str, Tuple[str, float]]) -> List[str]:
+        cur_node = goal
+        result = [goal]
+        while path[cur_node][0] != cur_node: # Keep iterating the path until it reaches the source node
+            result.append(path[cur_node][0])
+            cur_node = path[cur_node][0]
+
+        return list(reversed(result))
