@@ -4,6 +4,7 @@
 # α is the power of pheromone to affect the probability
 # β is the power of visibility to affect the probability (visibility is just the distance of the edges, the shorter it is, the higher the value)
 # If a shorter path has a high probability, it will eventually choose that path overtime since its pheromone will keep increasing
+
 # We have to customise our α β, we need to be careful about these values:
 # If α is too high, a path might already being chosen over just a short time when the ants haven't even discovered the optimal path yet
 # If α is too low, it will take a long time to search for the optimal path since higher pheromone doesn't contribute much to the probabilities

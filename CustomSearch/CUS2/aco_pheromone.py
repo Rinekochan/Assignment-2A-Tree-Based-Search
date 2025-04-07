@@ -9,7 +9,7 @@ class PheromoneGraph(object):
         # The default pheromone is 1 for all edges
         self.pheromone = {node: {neighbour: 1 for neighbour in graph.adj_list[node]} for node in graph.adj_list.keys()}
 
-        # The shorter path is more attractive (1 / dist)
+        # The shorter path is more attractive
         self.visibility = {node: {neighbour: 1 / dist for neighbour, dist in neighbours.items()} for node, neighbours in graph.adj_list.items()}
 
 
