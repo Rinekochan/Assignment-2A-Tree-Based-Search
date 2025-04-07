@@ -13,6 +13,11 @@
 # We also have p, which is the evaporation values that will make the pheromone of other edges fades away (decreasing its pheromone values)
 # And Q, the pheromone intensity indicates the rate that the chosen ant path is increasing
 
+# Algorithm Structure:
+# aco.py will be the main class of the algorithm that controls the ant and pheromone class
+# aco_ant.py will be the ant of the ACO algorithm
+# aco_pheromone.p will be the graph representation of the pheromone in the ACO algorithm
+
 class ACO(object):
     pheromone_power = 2 # or alpha
     visibility_power = 1 # or beta
@@ -21,8 +26,4 @@ class ACO(object):
     pheromone_intensity = 10 # or Q
 
     def __init__(self, graph: Graph):
-        # The default pheromone is 1 for all edges
-        self.pheromone = {node: {neighbour: 1 for neighbour in graph.adj_list[node]} for node in graph.adj_list.keys()}
 
-        # The shorter path is more attractive (1 / dist)
-        self.visibility = {node: [(neighbour, 1 / dist) for neighbour, dist in neighbours.items()] for node, neighbours in graph.adj_list.items()}
