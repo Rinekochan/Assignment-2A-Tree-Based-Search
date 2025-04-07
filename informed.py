@@ -1,6 +1,7 @@
 from utils import Graph
 from heuristics import pythagoras
 import heapq
+from itertools import count
 
 def astar(graph: Graph, root: str, goal: str):
     """
@@ -26,7 +27,8 @@ def astar(graph: Graph, root: str, goal: str):
 
     # Setup frontier as priority queue
     frontier = []
-    heapq.heappush(frontier, (heuristic[root], root))
+    counter = count()   # Chronological tie-breaker when same f(n)
+    heapq.heappush(frontier, (heuristic[root], root, next(counter)))
 
     prev = {}       # Tracks current path
 
@@ -40,7 +42,7 @@ def astar(graph: Graph, root: str, goal: str):
 
 
     while frontier:
-        current_cost, current_node = heapq.heappop(frontier)
+        current_cost, current_node, _ = heapq.heappop(frontier)
 
         # Stale checking
         # Since the node can get added to the frontier multiple times,
@@ -66,7 +68,7 @@ def astar(graph: Graph, root: str, goal: str):
                 path_sums[neighbour] = potential_path_sum
                 costs[neighbour] = potential_path_sum + heuristic[neighbour]
 
-                heapq.heappush(frontier, (costs[neighbour], neighbour))
+                heapq.heappush(frontier, (costs[neighbour], neighbour, next(counter)))
 
     # If goal is not found
     print("AS: There were some problems searching the path")
