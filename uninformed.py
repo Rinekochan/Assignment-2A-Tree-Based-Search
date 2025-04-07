@@ -3,7 +3,7 @@ from utils import Graph
 
 # Breadth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
-def bfs(graph: Graph, root: str, destinations: list):
+def bfs(graph: Graph, root: str, goal: str):
 	queue = []
 	visited = []
 
@@ -14,7 +14,7 @@ def bfs(graph: Graph, root: str, destinations: list):
 		node = queue.pop(0)
 		for neighbor, _ in graph.adj_list[node]:
 			if neighbor not in visited:
-				if neighbor in destinations:
+				if neighbor == goal:
 					visited.append(neighbor)
 					return visited
 				visited.append(neighbor)
@@ -26,7 +26,7 @@ def bfs(graph: Graph, root: str, destinations: list):
 
 # Depth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
-def dfs(graph: Graph, root: str, destinations: list):
+def dfs(graph: Graph, root: str, goal: str):
 	stack = []
 	visited = []
 
@@ -37,7 +37,7 @@ def dfs(graph: Graph, root: str, destinations: list):
 		node = stack.pop()
 		for neighbor, _ in graph.adj_list[node]:
 			if neighbor not in visited:
-				if neighbor in destinations:
+				if neighbor == goal:
 					visited.append(neighbor)
 					return visited
 				visited.append(neighbor)
