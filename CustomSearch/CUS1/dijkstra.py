@@ -31,7 +31,7 @@ def dijkstra(graph: Graph, root: str, goal: str):
         if current_node in visited:
             continue
 
-        for child, weight in graph.adj_list[current_node]:
+        for child, weight in graph.adj_list[current_node].items():
             if child in visited:
                 continue
             potential_dist = current_dist + weight;

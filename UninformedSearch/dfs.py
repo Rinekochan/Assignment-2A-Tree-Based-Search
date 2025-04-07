@@ -11,7 +11,7 @@ def dfs(graph: Graph, root: str, destinations: list):
 
     while len(stack) != 0:
         node = stack.pop()
-        for neighbor, _ in graph.adj_list[node]:
+        for neighbor, _ in graph.adj_list[node].items():
             if neighbor not in visited:
                 if neighbor in destinations:
                     visited.append(neighbor)

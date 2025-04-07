@@ -7,7 +7,7 @@ from collections import defaultdict
 class Graph:
     nodes: dict
     edges: dict
-    origin: int
+    origin: str
     destinations: list
     adj_list: dict
 
@@ -18,7 +18,11 @@ def parse_args():
         print("Usage: python3 search.py <filename> <method>")
         print("Methods currently supported:")
         print("\tbfs - Breath-first search")
-        exit("\tdfs - Depth-first search")
+        print("\tdfs - Depth-first search")
+        print("\tgbfs - Greedy best-first search")
+        print("\tas - A-star")
+        print("\tcus1 - Dijkstra")
+        print("\tcus2 - Ant Colony Optimisation")
     else:
         filename = sys.argv[1]
         method = sys.argv[2]
@@ -30,7 +34,7 @@ def parse_graph(filename):
     edges = {}
     origin = None
     destinations = []
-    adj_list = defaultdict(list)
+    adj_list = defaultdict(dict)
     graph = None
     with open(filename, 'r') as file:
         current_section = None
@@ -69,7 +73,7 @@ def parse_graph(filename):
                         edges[(src, dest)] = weight
 
                         # Add adjacency to the list, set empty array default is empty
-                        adj_list.setdefault(src, []).append((dest, weight))
+                        adj_list.setdefault(src, {}).setdefault(dest, weight)
 
                     case 'origin':
                         origin = line

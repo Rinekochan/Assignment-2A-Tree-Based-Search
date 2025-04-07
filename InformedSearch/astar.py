@@ -1,4 +1,4 @@
-﻿from utils import *
+﻿from utils import Graph, pythagoras
 import heapq
 from itertools import count
 
@@ -58,7 +58,7 @@ def astar(graph: Graph, root: str, goal: str):
 
             return list(reversed(path))
 
-        for neighbour, cost in graph.adj_list[current_node]:
+        for neighbour, cost in graph.adj_list[current_node].items():
             potential_path_sum = path_sums[current_node] + cost
 
             # Update best known path to neighbour and push the neighbour onto the frontier

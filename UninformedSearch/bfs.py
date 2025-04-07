@@ -11,7 +11,7 @@ def bfs(graph: Graph, root: str, destinations: list):
 
     while len(queue) != 0:
         node = queue.pop(0)
-        for neighbor, _ in graph.adj_list[node]:
+        for neighbor, _ in graph.adj_list[node].items():
             if neighbor not in visited:
                 if neighbor in destinations:
                     visited.append(neighbor)

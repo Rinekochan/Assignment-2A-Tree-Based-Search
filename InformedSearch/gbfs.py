@@ -27,7 +27,7 @@ def gbfs(graph: Graph, root: str, destinations: list):
             path.reverse()
             return path
         closest = min(destinations, key=lambda goal: math.dist(graph.nodes[node], graph.nodes[goal]))
-        for neighbour, _ in graph.adj_list.get(node,[]):
+        for neighbour, _ in graph.adj_list[node].items():
             if neighbour not in visited:
                 heuristic = math.dist(graph.nodes[neighbour], graph.nodes[closest])
                 prioQueue.put((heuristic, neighbour))
