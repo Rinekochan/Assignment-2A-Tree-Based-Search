@@ -1,6 +1,5 @@
 from uninformed import *
 from custom1 import *
-from greedybfs import *
 from utils import parse_args, parse_graph
 
 
@@ -22,9 +21,7 @@ def main():
 					result = dfs(graph, graph.origin, goal)
 				case "cus1":
 					result = dijkstra(graph, graph.origin, goal)
-				case "gbfs":
-					result = gbfs(graph, graph.origin, graph.destinations)
-				case "as" | "cus2":
+				case "gbfs" | "as"| "cus2":
 					exit(f"The method {method} is available but not implemented yet.")
 				case _:
 					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
