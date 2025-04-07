@@ -1,7 +1,9 @@
 from UninformedSearch.bfs import *
 from UninformedSearch.dfs import *
-from informed import *
+from InformedSearch.gbfs import *
+from InformedSearch.astar import *
 from CustomSearch.CUS1.dijkstra import *
+from CustomSearch.CUS2.aco import *
 
 from utils import parse_args, parse_graph
 
@@ -15,23 +17,25 @@ def main():
 
 		result = []
 
-		for goal in graph.destinations:
-			match method.lower():
-				case "bfs":
-					result = bfs(graph, graph.origin, goal)
-				case "dfs":
-					result = dfs(graph, graph.origin, goal)
-				case "as":
-					result = astar(graph, graph.origin, goal)
-				case "cus1":
-					result = dijkstra(graph, graph.origin, goal)
-				case "gbfs" | "cus2":
-					exit(f"The method {method} is available but not implemented yet.")
-				case _:
-					exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
+		match method.lower():
+			case "bfs":
+				result = bfs(graph, graph.origin, graph.destinations)
+			case "dfs":
+				result = dfs(graph, graph.origin, graph.destinations)
+			case "gbfs":
+				result = gbfs(graph, graph.origin, graph.destinations)
+			case "as":
+				result = astar(graph, graph.origin, graph.destinations)
+			case "cus1":
+				result = dijkstra(graph, graph.origin, graph.destinations)
+			case "cus2":
+				aco = ACO(graph)
+				result = aco.run(graph.origin, graph.destinations)
+			case _:
+				exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-			print(f"{goal} {len(result)}")
-			print(result)
+		print(f"{result[-1]} {len(result)}") # last element is the goal reached
+		print(result)
 
 
 	except Exception as err:
