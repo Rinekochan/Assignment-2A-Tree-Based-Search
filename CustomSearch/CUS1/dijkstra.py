@@ -1,6 +1,5 @@
 from utils import Graph
 import heapq
-import pdb
 
 def dijkstra(graph: Graph, root: str, goal: str):
     '''
@@ -29,7 +28,6 @@ def dijkstra(graph: Graph, root: str, goal: str):
 
     while len(pq) != 0:
         current_dist, current_node = heapq.heappop(pq)
-        pdb.set_trace()
         if current_node in visited:
             continue
 

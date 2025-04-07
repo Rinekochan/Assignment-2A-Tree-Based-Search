@@ -26,5 +26,5 @@ class ACO(object):
     evaporation_rate = 0.3 # or p
     pheromone_intensity = 10 # or Q
 
-    def __init__(self, graph: Graph):
+    # def __init__(self, graph: Graph):
 

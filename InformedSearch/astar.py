@@ -1,5 +1,4 @@
-﻿from utils import Graph
-from heuristics import pythagoras
+﻿from utils import *
 import heapq
 from itertools import count
 

@@ -1,7 +1,7 @@
 ﻿import sys
+import math
 from dataclasses import dataclass
 from collections import defaultdict
-
 
 @dataclass
 class Graph:
@@ -84,3 +84,15 @@ def parse_graph(filename):
         graph = Graph(nodes, edges, origin, destinations, adj_list)
 
     return graph
+
+def pythagoras(graph: Graph, goal: str):
+    result = {}
+    goal_x, goal_y = graph.nodes[goal]
+
+    for node in graph.nodes.keys():
+        start_x, start_y = graph.nodes[node]
+        dist = math.sqrt(pow(goal_x - start_x, 2) + pow(goal_y - start_y, 2))
+        result[node] = dist
+
+    return result
+
