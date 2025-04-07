@@ -1,5 +1,7 @@
 ﻿import sys
 from dataclasses import dataclass
+from collections import defaultdict
+
 
 @dataclass
 class Graph:
@@ -28,7 +30,7 @@ def parse_graph(filename):
     edges = {}
     origin = None
     destinations = []
-    adj_list = {}
+    adj_list = defaultdict(list)
     graph = None
     with open(filename, 'r') as file:
         current_section = None
