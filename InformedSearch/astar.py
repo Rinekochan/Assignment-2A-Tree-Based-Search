@@ -1,4 +1,4 @@
-﻿from utils import Graph, pythagoras
+﻿from utils import Graph, pythagoras, reconstruct_path
 import heapq
 from itertools import count
 
@@ -51,12 +51,7 @@ def astar(graph: Graph, root: str, goals: list):
             continue
 
         if current_node in goals:
-            path = [current_node]
-            while current_node in prev:
-                current_node = prev[current_node]
-                path.append(current_node)
-
-            return list(reversed(path))
+            return reconstruct_path(current_node, prev)
 
         for neighbour, cost in graph.adj_list[current_node].items():
             potential_path_sum = path_sums[current_node] + cost
