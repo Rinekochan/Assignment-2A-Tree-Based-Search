@@ -34,7 +34,10 @@ def main():
 			case _:
 				exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-		print(f"{result[-1]} {len(result)}") # last element is the goal reached
+		if len(result) and graph.origin in graph.destinations:
+			print(f"{result[-1]} {len(result)}") # last element is the goal reached
+		else:
+			print(f"{graph.destinations} N/A")
 		print(result)
 
 
