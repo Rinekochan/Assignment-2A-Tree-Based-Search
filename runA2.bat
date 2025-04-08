@@ -1,59 +1,24 @@
 @echo off
+setlocal enabledelayedexpansion
 
-echo Testing BFS:
-echo -------------------------------------
-for %%i in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17) do (
-    python search.py Test/test_%%i.txt bfs
-    echo.
-)
-echo -------------------------------------
-pause
+set tests=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+set algos=bfs dfs gbfs as cus1 cus2
 
-echo.
-echo Testing DFS:
-echo -------------------------------------
-for %%i in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17) do (
-    python search.py Test/test_%%i.txt dfs
-    echo.
-)
-echo -------------------------------------
-pause
+for %%a in (%algos%)do (
+    if "%%a"=="bfs" set algoName=Breadth-First Search
+    if "%%a"=="dfs" set algoName=Depth-First Search
+    if "%%a"=="gbfs" set algoName=Greedy Best-First Search
+    if "%%a"=="as" set algoName=A*
+    if "%%a"=="cus1" set algoName=CUS1 ^(Dijkstra^)
+    if "%%a"=="cus2" set algoName=CUS2 ^(Ant Colony Optimisation^)
 
-echo.
-echo Testing GBFS:
-echo -------------------------------------
-for %%i in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17) do (
-    python search.py Test/test_%%i.txt gbfs
     echo.
+    echo Testing !algoName!:
+    echo -------------------------------------
+    for %%i in (%tests%) do (
+        python search.py Test/test_%%i.txt %%a
+        echo.
+    )
+    echo -------------------------------------
+    pause
 )
-echo -------------------------------------
-pause
-
-echo.
-echo Testing A*:
-echo -------------------------------------
-for %%i in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17) do (
-    python search.py Test/test_%%i.txt as
-    echo.
-)
-echo -------------------------------------
-pause
-
-echo.
-echo Testing CUS1 (Dijkstra):
-echo -------------------------------------
-for %%i in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17) do (
-    python search.py Test/test_%%i.txt cus1
-    echo.
-)
-echo -------------------------------------
-pause
-
-echo.
-echo Testing CUS2 (ACO):
-echo -------------------------------------
-for %%i in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17) do (
-    python search.py Test/test_%%i.txt cus2
-    echo.
-)
-echo -------------------------------------
