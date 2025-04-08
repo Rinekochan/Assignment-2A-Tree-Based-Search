@@ -2,7 +2,7 @@
 import heapq
 from itertools import count
 
-def astar(graph: Graph, root: str, goal: str):
+def astar(graph: Graph, root: str, goals: list):
     """
     A* is a best-first search algorithm that finds the shortest path from a start to a goal node
     It uses:
@@ -22,7 +22,7 @@ def astar(graph: Graph, root: str, goal: str):
     """
 
     # Compute dictionary of euclidean distances, h(n)
-    heuristic = pythagoras(graph, goal)
+    heuristic = pythagoras(graph, goals)
 
     # Setup frontier as priority queue
     frontier = []
@@ -50,8 +50,8 @@ def astar(graph: Graph, root: str, goal: str):
         if current_cost > costs[current_node]:
             continue
 
-        if current_node == goal:
-            path = [goal]
+        if current_node in goals:
+            path = [current_node]
             while current_node in prev:
                 current_node = prev[current_node]
                 path.append(current_node)
@@ -70,5 +70,5 @@ def astar(graph: Graph, root: str, goal: str):
                 heapq.heappush(frontier, (costs[neighbour], neighbour, next(counter)))
 
     # If goal is not found
-    print("AS: There were some problems searching the path")
+    print("AS: No valid path was found")
     return []
