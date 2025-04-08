@@ -1,12 +1,15 @@
-﻿from utils import *
+from utils import Graph, pythagoras
 from queue import PriorityQueue
 import math
 
 #Greedy Best First Search
-#Calculates heuristic (euclidean distance / straight line distance)
+#Calculates heuristic using pythagoras (euclidean distance / straight line distance)
 #Potential issue: can reach dead ends (will not move further, ends path without reaching destination)
-#Tutor question: is number_of_nodes the total visited or the total of the path?
 def gbfs(graph: Graph, root: str, destinations: list):
+
+    #Set heuristic to euclidean distance using pythagoras
+    heuristic = pythagoras(graph, destinations)
+
     prioQueue = PriorityQueue()
     prioQueue.put((0, root))
 
@@ -15,22 +18,31 @@ def gbfs(graph: Graph, root: str, destinations: list):
 
     while not prioQueue.empty():
         _, node = prioQueue.get()
+
         if node in visited:
             continue
+
+        #Current node is added to the visited list
         visited.append(node)
+
+        #If current node is a destination, begins creating the path taken
         if node in destinations:
             path = []
             current = node
+
             while current is not None:
                 path.append(current)
                 current = parents[current]
+
             path.reverse()
             return path
-        closest = min(destinations, key=lambda goal: math.dist(graph.nodes[node], graph.nodes[goal]))
+
+        #for each neighbour, puts it into priority queue with its heuristic - distance from goal
         for neighbour, _ in graph.adj_list[node].items():
+
             if neighbour not in visited:
-                heuristic = math.dist(graph.nodes[neighbour], graph.nodes[closest])
-                prioQueue.put((heuristic, neighbour))
+                prioQueue.put((heuristic[neighbour], neighbour))
+
                 if neighbour not in parents:
                     parents[neighbour] = node
 
