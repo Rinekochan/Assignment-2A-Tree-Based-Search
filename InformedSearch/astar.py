@@ -29,7 +29,7 @@ def astar(graph: Graph, root: str, goals: list):
     counter = count()   # Chronological tie-breaker when same f(n)
     heapq.heappush(frontier, (heuristic[root], root, next(counter)))
 
-    prev = {}       # Tracks current path
+    prev = {root: None}       # Tracks current path
 
     # Cost from start to each node, g(n)
     path_sums = {node: float("inf") for node in graph.nodes}
