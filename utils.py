@@ -104,11 +104,11 @@ def pythagoras(graph: Graph, goals: list[str]):
 
     return result
 
-def reconstruct_path(goal: str, prev: list):
+def reconstruct_path(node: str, prev: list):
     """Given a node, backtrack through the prev list to see the path taken"""
-    path = [goal]
-    while goal in prev:
-        goal = prev[goal]
-        path.append(goal)
+    path = []
+    while node in prev:
+        path.append(node)
+        node = prev[node]
     
     return list(reversed(path))
