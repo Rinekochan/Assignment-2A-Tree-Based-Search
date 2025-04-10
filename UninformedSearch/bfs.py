@@ -1,23 +1,21 @@
-﻿from utils import Graph
+﻿from utils import Graph, reconstruct_path
+from collections import deque   # deque is more efficient than using lists as a queue
 
 # Breadth-first-search algorithm
 # return visited array if goal is achieved, otherwise None
 def bfs(graph: Graph, root: str, destinations: list):
-    queue = []
-    visited = []
+    queue = deque([root])
+    prev = {root: None}
 
-    queue.append(root)
-    visited.append(root)
+    while queue:
+        node = queue.popleft()
+        
+        for neighbour, _ in graph.adj_list[node].items():
+            if neighbour not in prev:
+                prev[neighbour] = node
+                if neighbour in destinations:
+                    return reconstruct_path(neighbour, prev)
+                queue.append(neighbour)
 
-    while len(queue) != 0:
-        node = queue.pop(0)
-        for neighbor, _ in graph.adj_list[node].items():
-            if neighbor not in visited:
-                if neighbor in destinations:
-                    visited.append(neighbor)
-                    return visited
-                visited.append(neighbor)
-                queue.append(neighbor)
-
-    print("BFS: There are some problems searching the path")
+    print("BFS: No valid path was found")
     return []
