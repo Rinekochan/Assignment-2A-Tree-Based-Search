@@ -1,7 +1,8 @@
+import re
 from utils import Graph
 import heapq
 
-def dijkstra(graph: Graph, root: str, goal: str):
+def dijkstra(graph: Graph, root: str, goals: str):
     '''
     Dijkstra is the algorithm that finds the shortest path within a graph between start and end nodes.
     This search algorithm is uninformed and node selection is based on the smallest cost on the priority queue.
@@ -31,6 +32,16 @@ def dijkstra(graph: Graph, root: str, goal: str):
         if current_node in visited:
             continue
 
+        if current_node in goals:
+            result = [current_node]
+            while current_node != root:
+                current_node = prev[current_node]
+                result.append(current_node)
+
+            result.reverse()
+            if result[0] == root and result[-1] in goals:
+                return result
+
         for child, weight in graph.adj_list[current_node].items():
             if child in visited:
                 continue
@@ -42,6 +53,10 @@ def dijkstra(graph: Graph, root: str, goal: str):
         
         visited.append(current_node)
 
+    print("CUS1: No valid path was found")
+    return []
+
+    '''
     current_node = goal
     result = [goal]
     while current_node != root:
@@ -54,3 +69,4 @@ def dijkstra(graph: Graph, root: str, goal: str):
     else:
         print("CUS1: There are some problems searching the path")
         return []
+    '''

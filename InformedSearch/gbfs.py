@@ -46,5 +46,5 @@ def gbfs(graph: Graph, root: str, destinations: list):
                 if neighbour not in parents:
                     parents[neighbour] = node
 
-    print("GBFS: There are some problems searching the path")
-    return [visited] #prints all accessed nodes before encountering issues
+    print("GBFS: No valid path was found")
+    return [] #prints all accessed nodes before encountering issues
