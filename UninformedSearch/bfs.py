@@ -14,8 +14,8 @@ def bfs(graph: Graph, root: str, destinations: list):
             if neighbour not in prev:
                 prev[neighbour] = node
                 if neighbour in destinations:
-                    return reconstruct_path(neighbour, prev)
+                    return reconstruct_path(neighbour, prev), len(prev)
                 queue.append(neighbour)
 
     print("BFS: No valid path was found")
-    return []
+    return [], len(prev)

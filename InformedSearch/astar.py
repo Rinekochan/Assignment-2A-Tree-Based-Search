@@ -51,7 +51,7 @@ def astar(graph: Graph, root: str, goals: list):
             continue
 
         if current_node in goals:
-            return reconstruct_path(current_node, prev)
+            return reconstruct_path(current_node, prev), len(prev)
 
         for neighbour, cost in graph.adj_list[current_node].items():
             potential_path_sum = path_sums[current_node] + cost
@@ -66,4 +66,4 @@ def astar(graph: Graph, root: str, goals: list):
 
     # If goal is not found
     print("AS: No valid path was found")
-    return []
+    return [], len(prev)
