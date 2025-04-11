@@ -41,6 +41,7 @@ def dijkstra(graph: Graph, root: str, goals: str):
             result.reverse()
             if result[0] == root and result[-1] in goals:
                 return result
+                #return result, len(visited)
 
         for child, weight in graph.adj_list[current_node].items():
             if child in visited:
@@ -55,18 +56,4 @@ def dijkstra(graph: Graph, root: str, goals: str):
 
     print("CUS1: No valid path was found")
     return []
-
-    '''
-    current_node = goal
-    result = [goal]
-    while current_node != root:
-        current_node = prev[current_node]
-        result.append(current_node)
-
-    result.reverse()
-    if result[0] == root and result[-1] == goal:
-        return result
-    else:
-        print("CUS1: There are some problems searching the path")
-        return []
-    '''
+    #return [], len(visited)
