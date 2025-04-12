@@ -2,6 +2,23 @@
 from CustomSearch.CUS2.aco_pheromone import PheromoneGraph
 from utils import Graph
 
+# ACO is a probabilistic technique for solving computational problems that can be
+# reduced to finding good paths through graph.s The algorithm is inspired by the
+# foraging behavior of ants, who leave pheromone trails to mark favorable paths for
+# other ants to follow.
+
+# Key components of ACO:
+# 1. Ants: Individual agents that construct solutions
+# 2. Pheromone: A chemical marker that influences path selection
+# 3. Evaporation: Gradual reduction of pheromone over time
+# 4. Probability Formula: Determines how ants choose their path
+
+# The core idea of ACO is:
+# - Ants travel through the graph seeking destination nodes
+# - They leave pheromone along paths they traverse
+# - Shorter paths accumulate more pheromone (as ants complete these paths faster)
+# - Over time, most ants converge to the optimal path
+
 # We will have Probability(node) = (pheromone^α) × (visibility^β)
 # α is the power of pheromone to affect the probability
 # β is the power of visibility to affect the probability (visibility is just the distance of the edges, the shorter it is, the higher the value)
@@ -38,6 +55,7 @@ class ACO(object):
         self.pheromone_graph = PheromoneGraph(graph)
 
     def run(self, origin, destinations):
+        # initialize default values for current goal, best path, and best length
         current_goal = None
         best_path = None
         best_length = float('inf')
@@ -45,15 +63,18 @@ class ACO(object):
         for _ in range(self.nums_iterations):
             paths = []
 
+            # Release multiple ants
             for _ in range(self.nums_ants):
-                ant = Ant(self.graph, self.pheromone_graph, origin, destinations)
-                path = ant.find_path(self.pheromone_power, self.visibility_power)
+                ant = Ant(self.graph, self.pheromone_graph, origin, destinations) # initialise ant object
+                path = ant.find_path(self.pheromone_power, self.visibility_power) # return path traversed by ant
                 for node in path.keys():
                     if node in destinations:
                         paths.append((node, path))
 
+            # Evaporate pheromone across all paths
             self.pheromone_graph.evaporate_pheromone(self.evaporation_rate)
 
+            # Add new pheromone to discovered paths
             for goal, path in paths:
                 self.pheromone_graph.add_pheromone(goal, path, self.pheromone_intensity)
                 length = self.pheromone_graph.path_length(goal, path)
@@ -62,6 +83,6 @@ class ACO(object):
                     best_path = path
                     best_length = length
 
+            # Return best path found
             if current_goal is None: return []
-
             return self.pheromone_graph.get_path_to_array(current_goal, best_path)
