@@ -19,25 +19,22 @@ def main():
 
 		match method.lower():
 			case "bfs":
-				result = bfs(graph, graph.origin, graph.destinations)
+				result, node_cnt = bfs(graph, graph.origin, graph.destinations)
 			case "dfs":
-				result = dfs(graph, graph.origin, graph.destinations)
+				result, node_cnt = dfs(graph, graph.origin, graph.destinations)
 			case "gbfs":
-				result = gbfs(graph, graph.origin, graph.destinations)
+				result, node_cnt = gbfs(graph, graph.origin, graph.destinations)
 			case "as":
-				result = astar(graph, graph.origin, graph.destinations)
+				result, node_cnt = astar(graph, graph.origin, graph.destinations)
 			case "cus1":
-				result = dijkstra(graph, graph.origin, graph.destinations)
+				result, node_cnt = dijkstra(graph, graph.origin, graph.destinations)
 			case "cus2":
 				aco = ACO(graph)
-				result = aco.run(graph.origin, graph.destinations)
+				result, node_cnt = aco.run(graph.origin, graph.destinations)
 			case _:
 				exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-		if len(result):
-			print(f"{result[-1]} {len(result)}") # last element is the goal reached
-		else:
-			print(f"{graph.destinations} N/A")
+		print(f"{result[-1] if len(result) else "N/A"} {node_cnt}") # last element is the goal reached
 		print(result)
 
 
