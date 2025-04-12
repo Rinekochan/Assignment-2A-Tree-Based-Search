@@ -35,8 +35,7 @@ def gbfs(graph: Graph, root: str, destinations: list):
                 current = parents[current]
 
             path.reverse()
-            return path
-            #return path, len(visited)
+            return path, len(visited)
 
         #for each neighbour, puts it into priority queue with its heuristic - distance from goal
         for neighbour, _ in graph.adj_list[node].items():
@@ -48,5 +47,4 @@ def gbfs(graph: Graph, root: str, destinations: list):
                     parents[neighbour] = node
 
     print("GBFS: No valid path was found")
-    return [] #prints all accessed nodes before encountering issues
-    #return path, len(visited)
+    return [], len(visited)
