@@ -36,6 +36,12 @@ def main():
 
 		print(f"{result[-1] if len(result) else 'N/A'} {node_cnt}") # last element is the goal reached
 		print(result)
+		total_distance = 0
+
+		for idx in range(1, len(result)):
+			total_distance += graph.adj_list[result[idx - 1]][result[idx]]
+
+		print(f"Path Distance: {total_distance}")
 
 
 	except Exception as err:

@@ -69,20 +69,27 @@ def dijkstra(graph: Graph, root: str, goals: list):
         path.reverse()
         path_map[goal] = path
 
+
+
     result = None
-    path_length = float("inf")
+    min_path_distance = float("inf")
     for goal in path_map.keys():
         cur_path = path_map[goal]
-        if cur_path == []:
+        total_distance = 0
+
+        for idx in range(1, len(cur_path)):
+            total_distance += graph.adj_list[cur_path[idx - 1]][cur_path[idx]]
+
+        if not cur_path:
             continue
-        if len(cur_path) >= path_length:
+        if total_distance >= min_path_distance:
             continue
         else:
             result = cur_path
-            path_length = len(cur_path)
+            min_path_distance = total_distance
 
     if result is not None:
-        return result
+        return result, len(visited)
     else:
-        print("CUS1: There are some problems searching the path")
-        return []
+        print("CUS1: No valid path was found")
+        return [], len(visited)
