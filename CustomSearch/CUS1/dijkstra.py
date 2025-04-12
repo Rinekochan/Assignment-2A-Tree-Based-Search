@@ -42,7 +42,6 @@ def dijkstra(graph: Graph, root: str, goals: list):
 
             result.reverse()
             if result[0] == root and result[-1] in goals:
-                print(visited)
                 return result, len(visited)
 
         for child, weight in graph.adj_list[current_node].items():
