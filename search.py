@@ -34,7 +34,7 @@ def main():
 			case _:
 				exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-		print(f"{result[-1] if len(result) else "N/A"} {node_cnt}") # last element is the goal reached
+		print(f"{result[-1] if len(result) else 'N/A'} {node_cnt}") # last element is the goal reached
 		print(result)
 
 

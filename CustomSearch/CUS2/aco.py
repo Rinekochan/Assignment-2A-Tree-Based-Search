@@ -2,7 +2,7 @@
 from CustomSearch.CUS2.aco_pheromone import PheromoneGraph
 from utils import Graph
 
-# We will have Probability(node) = (pheromone^α) × (visibility^β)
+# We will have Probability(path) = (pheromone^α) × (visibility^β)
 # α is the power of pheromone to affect the probability
 # β is the power of visibility to affect the probability (visibility is just the distance of the edges, the shorter it is, the higher the value)
 # If a shorter path has a high probability, it will eventually choose that path overtime since its pheromone will keep increasing
