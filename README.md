@@ -75,10 +75,15 @@ Assignment-2A-Tree-Based-Search
 | CUS2: Genetic Algorithm | Informed Custom   | A method for solving both constrained and unconstrained optimisation problems that is based on natural selection |
 
 ## Installation & Requirements
-This project is implemented in Python. Ensure you have Python 3.10.x (or greater) installed. No external dependencies are required, since only built-in data structures are used.
+This project is implemented in Python. Ensure you have Python 3.10.x (or greater) installed. There are two optional dependencies: `networkx` and `matplotlib` used for rendering the graph from input file.
 ### Running the Program
 Execute the program via the command line:
 ```$ python search.py <input_file> <search_method>```
+
+If you want to visualise the graph, change the input filename in line 5, and run the script as follows:
+```
+$ python render_graph.py <input_file>
+```
 
 ## Output format
 The program prints the following results:
