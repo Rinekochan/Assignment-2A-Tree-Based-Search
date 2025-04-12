@@ -32,6 +32,8 @@ def dijkstra(graph: Graph, root: str, goals: list):
         if current_node in visited:
             continue
 
+        visited.append(current_node)
+
         if current_node in goals:
             result = [current_node]
             while current_node != root:
@@ -40,6 +42,7 @@ def dijkstra(graph: Graph, root: str, goals: list):
 
             result.reverse()
             if result[0] == root and result[-1] in goals:
+                print(visited)
                 return result, len(visited)
 
         for child, weight in graph.adj_list[current_node].items():
@@ -50,8 +53,7 @@ def dijkstra(graph: Graph, root: str, goals: list):
                 dist[child] = potential_dist
                 prev[child] = current_node
                 heapq.heappush(pq, (potential_dist, child))
-        
-        visited.append(current_node)
+
 
     path_map = {}
 
