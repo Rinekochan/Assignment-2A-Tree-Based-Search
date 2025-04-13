@@ -13,7 +13,7 @@ class Ant(object):
         self.pheromone_graph = pheromone_graph
         self.origin = origin
         self.destinations = destinations
-        self.visited = set(origin)
+        self.visited = set()
 
     # Ant choose the next node based on probabilities
     def choose_next_node(self, cur_node: str, pheromone_power: float, visibility_power: float) -> Optional[str]:
@@ -42,6 +42,7 @@ class Ant(object):
     def find_path(self, pheromone_power: float, visibility_power: float) -> Mapping[str, Tuple[str, float]]:
         current = self.origin
         ant_path = {self.origin: (self.origin, 0)}
+        self.visited.add(current)
         while current not in self.destinations:
             next_node = self.choose_next_node(current, pheromone_power, visibility_power)
             if next_node is None: break # Dead end

@@ -23,7 +23,7 @@ from utils import Graph
 
 class ACO(object):
 
-    def __init__(self, graph: Graph, pheromone_power = 2, visibility_power = 1, evaporation_rate = 0.3, pheromone_intensity = 10, nums_ants = 50, nums_iterations = 100):
+    def __init__(self, graph: Graph, pheromone_power = 0.7, visibility_power = 0.3, evaporation_rate = 0.2, pheromone_intensity = 10, nums_ants = 100, nums_iterations = 100):
         self.graph = graph
 
         self.pheromone_power = pheromone_power # or alpha
@@ -38,6 +38,7 @@ class ACO(object):
         self.pheromone_graph = PheromoneGraph(graph)
 
     def run(self, origin, destinations):
+        num_visited_nodes = 0
         current_goal = None
         best_path = None
         best_length = float('inf')
@@ -55,6 +56,7 @@ class ACO(object):
             self.pheromone_graph.evaporate_pheromone(self.evaporation_rate)
 
             for goal, path in paths:
+                num_visited_nodes += len(path)
                 self.pheromone_graph.add_pheromone(goal, path, self.pheromone_intensity)
                 length = self.pheromone_graph.path_length(goal, path)
                 if length < best_length:
@@ -62,6 +64,6 @@ class ACO(object):
                     best_path = path
                     best_length = length
 
-            if current_goal is None: return []
+        if current_goal is None: return [], num_visited_nodes
 
-            return self.pheromone_graph.get_path_to_array(current_goal, best_path)
+        return self.pheromone_graph.get_path_to_array(current_goal, best_path), num_visited_nodes
