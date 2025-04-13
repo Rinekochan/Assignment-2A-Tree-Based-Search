@@ -23,7 +23,7 @@ from utils import Graph
 
 class ACO(object):
 
-    def __init__(self, graph: Graph, pheromone_power = 0.7, visibility_power = 0.3, evaporation_rate = 0.2, pheromone_intensity = 10, nums_ants = 100, nums_iterations = 100):
+    def __init__(self, graph: Graph, pheromone_power = 0.7, visibility_power = 0.3, evaporation_rate = 0.2, pheromone_intensity = 10, nums_ants = 80, nums_iterations = 40):
         self.graph = graph
 
         self.pheromone_power = pheromone_power # or alpha
