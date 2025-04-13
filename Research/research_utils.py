@@ -47,7 +47,4 @@ def parse_graph(filename):
     return nodes
 
 def euclidean(cur: dict[Tuple[int]], nxt: dict[Tuple[int]]):
-    cur_x, cur_y = cur.items()
-    nxt_x, nxt_y = nxt.items()
-
-    return math.sqrt((cur_x - nxt_x) ** 2 +(cur_y - nxt_y) ** 2)
+    return math.sqrt((cur[0] - nxt[0]) ** 2 +(cur[1] - nxt[1]) ** 2)

@@ -16,22 +16,17 @@ def main():
 
         match method.lower():
             case "nn":
-                result, node_cnt = nearest_neighbor(nodes)
+                result, node_cnt, distance = nearest_neighbor(nodes)
             case "dp":
-                result, node_cnt = dynamic_programming(nodes)
+                result, node_cnt, distance = dynamic_programming(nodes)
             case "ga":
-                result, node_cnt = genetic_algorithm(nodes)
+                result, node_cnt, distance = genetic_algorithm(nodes)
             case _:
                 exit("Unknown method, available methods: BFS, DFS, GBFS, AS, CUS1, CUS2")
 
-        print(f"{result[-1] if len(result) else 'N/A'} {node_cnt}") # last element is the goal reached
-        print(result)
-        total_distance = 0
-
-        # for idx in range(1, len(result)):
-        #     total_distance += graph.adj_list[result[idx - 1]][result[idx]]
-
-        print(f"Path Distance: {total_distance}")
+        print(f"Path: {result if len(result) else 'N/A'}") # last element is the goal reached
+        print(f"Visited count: {node_cnt}")
+        print(f"Total Distance: {distance}")
 
 
     except Exception as err:
