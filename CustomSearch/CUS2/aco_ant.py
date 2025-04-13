@@ -13,17 +13,16 @@ class Ant(object):
         self.pheromone_graph = pheromone_graph
         self.origin = origin
         self.destinations = destinations
-        self.visited = set(origin)
+        self.visited = set()
 
     # Ant choose the next node based on probabilities
     def choose_next_node(self, cur_node: str, pheromone_power: float, visibility_power: float) -> Optional[str]:
-        # Calculate probability for each neighboring node
         neighbours = self.pheromone_graph.pheromone[cur_node].keys()
         probabilities = []
         nodes = []
 
         for neighbour in neighbours:
-            if neighbour in self.visited: continue # Skip visited nodes
+            if neighbour in self.visited: continue
 
             # Apply the probability formula
             pheromone = self.pheromone_graph.pheromone[cur_node][neighbour] ** pheromone_power
@@ -46,25 +45,18 @@ class Ant(object):
     def find_path(self, pheromone_power: float, visibility_power: float) -> Mapping[str, Tuple[str, float]]:
         # The ant starts at the origin node, and initialises its path dictionary
         current = self.origin
-        # The path is represented as a dictionary where:
-        # - Keys are the nodes visited
-        # - Values are tuples of (parent_node, distance)
-        # - For the origin, the parent is itself with distance 0
         ant_path = {self.origin: (self.origin, 0)}
-
-        # Path building loop - the ant continues moving until either:
-        # - It reaches one of the destination nodes
-        # - It hits a dead end (all the neighbors are visited)
+        self.visited.add(current)
         while current not in self.destinations:
-            next_node = self.choose_next_node(current, pheromone_power, visibility_power) # choose_next_node method is called to select the next node probabilistically (with alpha and beta provided)
+            next_node = self.choose_next_node(current, pheromone_power, visibility_power)
             if next_node is None: break # Dead end
 
             # For each visited node:
             # - The node is added to the visited set
-            # - An entry is added to the path dictionary, 
+            # - An entry is added to the path dictionary,
             #   recording which node the ant came from and the distance between the current and next node
             self.visited.add(next_node)
             ant_path[next_node] = (current, self.graph.adj_list[current][next_node])
             current = next_node
-        
+
         return ant_path

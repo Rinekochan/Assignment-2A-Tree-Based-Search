@@ -9,13 +9,14 @@ def bfs(graph: Graph, root: str, destinations: list):
 
     while queue:
         node = queue.popleft()
-        
-        for neighbour, _ in graph.adj_list[node].items():
+
+        for neighbour, _ in sorted(graph.adj_list[node].items(),
+                                   key=lambda item: int(item[0]) if item[0].isdigit() else item[0]):
             if neighbour not in prev:
                 prev[neighbour] = node
                 if neighbour in destinations:
-                    return reconstruct_path(neighbour, prev)
+                    return reconstruct_path(neighbour, prev), len(prev)
                 queue.append(neighbour)
 
     print("BFS: No valid path was found")
-    return []
+    return [], len(prev)

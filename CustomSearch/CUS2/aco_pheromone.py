@@ -33,7 +33,6 @@ class PheromoneGraph(object):
             for neighbor in self.pheromone[cur_node]:
                 self.pheromone[cur_node][neighbor] *= (1 - evaporate_rate)
 
-
     @staticmethod
     def path_length(goal: str, path: Mapping[str, Tuple[str, float]]) -> float:
         cur_node = goal

@@ -70,7 +70,7 @@ def generate_and_save_tests(num_tests: int, num_nodes: int, num_edges: int, max_
     os.makedirs(test_folder, exist_ok=True)
 
     # Generate and save each test case
-    for i in range(1, num_tests + 1):
+    for i in range(18, 18 + num_tests):
         test_data = generate_test_case(num_nodes, num_edges, max_coordinate, max_cost)
         file_path = os.path.join(test_folder, f"test_{i}.txt")
         with open(file_path, "w") as file:
@@ -80,4 +80,4 @@ def generate_and_save_tests(num_tests: int, num_nodes: int, num_edges: int, max_
 
 
 if __name__ == "__main__":
-    generate_and_save_tests(num_tests=15, num_nodes=15, num_edges=30, max_coordinate=30, max_cost=20)
+    generate_and_save_tests(num_tests=3, num_nodes=150, num_edges=300, max_coordinate=250, max_cost=150)

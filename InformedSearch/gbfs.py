@@ -11,13 +11,15 @@ def gbfs(graph: Graph, root: str, destinations: list):
     heuristic = pythagoras(graph, destinations)
 
     prioQueue = PriorityQueue()
-    prioQueue.put((0, root))
+    counter = 0 #chronological counter for tie-breaking
+    prioQueue.put((0, root, counter))
+    counter += 1
 
     visited = []
     parents = {root: None} #track parent of each node (which node we previously came from)
 
     while not prioQueue.empty():
-        _, node = prioQueue.get()
+        _, node, _ = prioQueue.get()
 
         if node in visited:
             continue
@@ -35,16 +37,17 @@ def gbfs(graph: Graph, root: str, destinations: list):
                 current = parents[current]
 
             path.reverse()
-            return path
+            return path, len(visited)
 
         #for each neighbour, puts it into priority queue with its heuristic - distance from goal
         for neighbour, _ in graph.adj_list[node].items():
 
             if neighbour not in visited:
-                prioQueue.put((heuristic[neighbour], neighbour))
+                prioQueue.put((heuristic[neighbour], neighbour, counter))
+                counter += 1;
 
                 if neighbour not in parents:
                     parents[neighbour] = node
 
-    print("GBFS: There are some problems searching the path")
-    return [visited] #prints all accessed nodes before encountering issues
+    print("GBFS: No valid path was found")
+    return [], len(visited)

@@ -1,7 +1,8 @@
+import re
 from utils import Graph
 import heapq
 
-def dijkstra(graph: Graph, root: str, goal: str):
+def dijkstra(graph: Graph, root: str, goals: list):
     '''
     Dijkstra is the algorithm that finds the shortest path within a graph between start and end nodes.
     This search algorithm is uninformed and node selection is based on the smallest cost on the priority queue.
@@ -31,6 +32,18 @@ def dijkstra(graph: Graph, root: str, goal: str):
         if current_node in visited:
             continue
 
+        visited.append(current_node)
+
+        if current_node in goals:
+            result = [current_node]
+            while current_node != root:
+                current_node = prev[current_node]
+                result.append(current_node)
+
+            result.reverse()
+            if result[0] == root and result[-1] in goals:
+                return result, len(visited)
+
         for child, weight in graph.adj_list[current_node].items():
             if child in visited:
                 continue
@@ -39,18 +52,45 @@ def dijkstra(graph: Graph, root: str, goal: str):
                 dist[child] = potential_dist
                 prev[child] = current_node
                 heapq.heappush(pq, (potential_dist, child))
-        
-        visited.append(current_node)
 
-    current_node = goal
-    result = [goal]
-    while current_node != root:
-        current_node = prev[current_node]
-        result.append(current_node)
 
-    result.reverse()
-    if result[0] == root and result[-1] == goal:
-        return result
+    path_map = {}
+
+    for goal in goals:
+        current_node = goal
+        path = [goal]
+        while current_node != root:
+            if current_node not in prev.keys():
+                path = []
+                break
+            else:
+                current_node = prev[current_node]
+                path.append(current_node)
+
+        path.reverse()
+        path_map[goal] = path
+
+
+
+    result = None
+    min_path_distance = float("inf")
+    for goal in path_map.keys():
+        cur_path = path_map[goal]
+        total_distance = 0
+
+        for idx in range(1, len(cur_path)):
+            total_distance += graph.adj_list[cur_path[idx - 1]][cur_path[idx]]
+
+        if not cur_path:
+            continue
+        if total_distance >= min_path_distance:
+            continue
+        else:
+            result = cur_path
+            min_path_distance = total_distance
+
+    if result is not None:
+        return result, len(visited)
     else:
-        print("CUS1: There are some problems searching the path")
-        return []
+        print("CUS1: No valid path was found")
+        return [], len(visited)
