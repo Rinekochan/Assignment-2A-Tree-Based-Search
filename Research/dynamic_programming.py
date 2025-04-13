@@ -6,44 +6,60 @@ from Research.research_utils import euclidean
 
 def dynamic_programming(nodes: dict[Tuple[int]]):
     if len(nodes) > 20: raise ValueError("Dynammic Programming can't run any graphs with more than 20 nodes")
-    # Convert the node dict into a list of node IDs and positions for easier indexing.
+
     node_ids = list(nodes.keys())
-    coords = [nodes[nid] for nid in node_ids]  # List of coordinates
+    coords = [nodes[nid] for nid in node_ids]
     n = len(coords)
 
-    # Store next move for (current_node_index, visited_mask)
-    next_move = {}
-
-    @lru_cache(maxsize=None) # Use cache in python as a method to memorize precalculated results for dynammic programming
+    @lru_cache(maxsize=None) # Using Python memoization to avoid recomputation
     def dp(pos: int, visited: int) -> float:
         if visited == (1 << n) - 1:
-            return euclidean(coords[pos], coords[0])  # Return to start
+            return 0  # No return to start
 
         min_cost = float('inf')
-        best_next = None
         for nxt in range(n):
-            if not (visited >> nxt) & 1:  # If nxt is not visited
+            if not (visited >> nxt) & 1:
+                # Recursively calculate cost to next node + remaining path
                 cost = euclidean(coords[pos], coords[nxt]) + dp(nxt, visited | (1 << nxt))
                 if cost < min_cost:
                     min_cost = cost
-                    best_next = nxt
-
-        next_move[(pos, visited)] = best_next  # Save decision
         return min_cost
 
-    # Run DP to compute min cost
-    distance = dp(0, 1 << 0)
+    # Best path details
+    best_distance = float('inf')
+    best_start = 0
 
-    # Reconstruct the path
-    path_indices = [0]
-    pos = 0
-    visited = 1 << 0
-    while (pos, visited) in next_move:
-        next_pos = next_move[(pos, visited)]
-        path_indices.append(next_pos)
-        visited |= (1 << next_pos)
-        pos = next_pos
+    # Try all starting positions
+    for start in range(n):
+        total_distance = dp(start, 1 << start) # Start from this node with its bit set in visited
+        if total_distance < best_distance:
+            best_distance = total_distance
+            best_start = start
 
-    path_ids = [node_ids[i] for i in path_indices]
+    # Reconstruct path for best_start using a greedy traceback
+    def reconstruct(start):
+        pos = start
+        visited = 1 << pos
+        path = [pos]
 
-    return path_ids, len(path_ids), distance
+        while visited != (1 << n) - 1:
+            best_next = None
+            min_cost = float('inf')
+            for nxt in range(n):
+                if not (visited >> nxt) & 1:
+                    # Estimate cost of going to 'nxt' and completing the rest
+                    cost = euclidean(coords[pos], coords[nxt]) + dp(nxt, visited | (1 << nxt)) # The dp result is already saved, so there will be no recomputed
+                    if cost < min_cost:
+                        min_cost = cost
+                        best_next = nxt
+            if best_next is None:
+                break
+            path.append(best_next)
+            visited |= (1 << best_next)
+            pos = best_next
+
+        return path
+
+    best_path_indices = reconstruct(best_start)
+    path_ids = [node_ids[i] for i in best_path_indices]
+    return path_ids, len(path_ids), best_distance
